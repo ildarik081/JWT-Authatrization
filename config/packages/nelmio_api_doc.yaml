@@ -1,0 +1,17 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: API Documentation (Demo SWAGGER)
+            description: Контакты <br />
+             - [GitHub](https://github.com/)<br />
+             - [Репозиторий](https://github.com/)
+            version: 0.0.1
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+    areas:
+        path_patterns: 
+            - ^/api(?!/doc$)

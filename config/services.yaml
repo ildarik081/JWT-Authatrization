@@ -1,0 +1,58 @@
+imports:
+    - { resource: parameters.yaml }
+
+parameters:
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\Component\Security\JwtChecker:
+        class: App\Component\Security\JwtChecker
+        arguments:
+            $filePath: '%public_key_path%'
+            $workingDir: '%working_dir%'
+
+    App\Component\StaticDataGenerator:
+        class: App\Component\StaticDataGenerator
+        arguments:
+            $timeAccessToken: '%time_access_token%'
+            $filePath: '%secret_key_path%'
+            $workingDir: '%working_dir%'
+
+    App\Service\AutharizationService:
+        class: App\Service\AutharizationService
+        arguments:
+            $countAttemptsLogin: '%count_attempts_login%'
+
+    JMS\Serializer\SerializerInterface: '@jms_serializer'
+
+    App\Component\Resolver\RequestDtoResolver:
+        arguments:
+            $urlWithoutJwt: '%url_without_jwt%'
+        tags:
+            - { name: controller.argument_value_resolver, priority: 50 }
+    
+    Predis\ClientInterface:
+        class: Predis\Client
+        arguments:
+            $parameters: '%redis_connect%'
+    
+    App\Component\Redis\RedisTools:
+        class: App\Component\Redis\RedisTools
+        arguments:
+            $timeRefreshTokenSec: '%time_refresh_token_sec%'
+            $timeAttemptsLoginSec: '%time_attempts_login_sec%'
+
+    Nyholm\Psr7\Factory\Psr17Factory:
+        class: Nyholm\Psr7\Factory\Psr17Factory
+
+    JMS\Serializer\Serializer: '@jms_serializer'

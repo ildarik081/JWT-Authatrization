@@ -1,0 +1,18 @@
+# app/config/parameters.yml
+parameters:
+  working_dir: '%env(resolve:WORKING_DIR)%'
+  public_key_path: '%env(resolve:JWT_PUBLIC_KEY_PATH)%'
+  secret_key_path: '%env(resolve:JWT_SECRET_KEY_PATH)%'
+  redis_connect: 
+    host: '%env(resolve:REDIS_HOST)%'
+    port: '%env(resolve:PREDIS_PORT)%'
+    password: '%env(resolve:REDIS_PASSWORD)%'
+  time_access_token: '%env(resolve:TIME_ACCESS_TOKEN)%'
+  time_refresh_token_sec: '%env(resolve:TIME_REFRESH_TOKEN_SEC)%'
+  time_attempts_login_sec: '%env(resolve:TIME_ATTEMPTS_LOGIN_SEC)%'
+  count_attempts_login: '%env(resolve:COUNT_ATTEMPTS_LOGIN)%'
+  url_without_jwt:
+    - '/api/login'
+    - '/api/registration'
+    - '/api/logout'
+    - '/api/refresh'
