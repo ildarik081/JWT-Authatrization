@@ -15,8 +15,6 @@
 - symfony 5.4
 - redis 6.2.6
 
-### [Demo](http://github.com/)
-
 ### Install
 
 1. Запуск
