@@ -39,9 +39,25 @@ openssl genrsa -out "config/.keys/private.pem" 256
 ```
 6. Сгенерировать публичный ключ
 ```bash
-openssl rsa -in "config/.keys/private.pem" -pubout -out "config/.jwt/public.pem"
+openssl rsa -in "config/.keys/private.pem" -pubout -out "config/.keys/public.pem"
 ```
 7. Зайти в swagger по адресу http://127.0.0.1/api/doc
+
+### X-DEBUG
+
+1. Установить расширение [PHP Debug](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug) (VSCode)
+
+2. Раскоментировать *client_host* в зависимости от OS
+```Dockerfile
+# Путь .docker/dev/php/Dockerfile
+# Для Windows
+&& echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+```
+```Dockerfile
+# Путь .docker/dev/php/Dockerfile
+# Для Linux
+&& echo "xdebug.client_host=172.17.0.1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+```
 
 ### Тесты
 

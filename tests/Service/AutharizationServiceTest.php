@@ -105,7 +105,7 @@ class AutharizationServiceTest extends AbstractTestCaseService
         $staticDataGenerator = new StaticDataGenerator($timeAccessToken, $filePath, $workingDir);
         $builder = new UserBuilder();
 
-        $connectRedis = ['host' => $_ENV['REDIS_HOST'], 'port' => $_ENV['PREDIS_PORT']];
+        $connectRedis = ['host' => $_ENV['REDIS_HOST'], 'port' => $_ENV['REDIS_PORT']];
         $redisClient = new Client($connectRedis);
 
         $userRepository = self::getContainer()->get(UserRepository::class);

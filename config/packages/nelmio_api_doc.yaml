@@ -3,8 +3,8 @@ nelmio_api_doc:
         info:
             title: API Documentation (Demo SWAGGER)
             description: Контакты <br />
-             - [GitHub](https://github.com/)<br />
-             - [Репозиторий](https://github.com/)
+             - [GitHub](https://github.com/ildarik081)<br />
+             - [Репозиторий](https://github.com/ildarik081/auth)
             version: 0.0.1
         components:
             securitySchemes:
@@ -12,6 +12,11 @@ nelmio_api_doc:
                     type: http
                     scheme: bearer
                     bearerFormat: JWT
+        tags:
+        - name: Autharization
+          description: Ручки для авторизации
+        - name: User
+          description: Ручки для работы с данными пользователя
     areas:
         path_patterns: 
             - ^/api(?!/doc$)

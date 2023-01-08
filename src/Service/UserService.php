@@ -88,7 +88,7 @@ class UserService
                 message: 'Сессия не найдена',
                 code: ResponseAlias::HTTP_BAD_REQUEST,
                 responseCode: 'SESSION_NOT_FOUND',
-                logLevel: LogLevel::INFO
+                logLevel: LogLevel::WARNING
             );
         }
 
@@ -96,7 +96,6 @@ class UserService
         $user->setArx(true);
 
         $this->redisTools->clearRedisData(
-            /** @phpstan-ignore-next-line */
             $request->session,
             $request->refreshToken,
             $request->jwtInfo->user->id

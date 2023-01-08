@@ -153,7 +153,7 @@ class AutharizationService
                 message: 'Превышено допустимое количество попыток. Попробуйте повторить авторизацию позже',
                 code: ResponseAlias::HTTP_UNAUTHORIZED,
                 responseCode: 'EXCEEDED_ATTEMPTS_LOGIN',
-                logLevel: LogLevel::INFO
+                logLevel: LogLevel::WARNING
             );
         }
 
@@ -165,7 +165,7 @@ class AutharizationService
                 message: "Неверный пароль! Осталось $remainingAttempts попыток",
                 code: ResponseAlias::HTTP_UNAUTHORIZED,
                 responseCode: 'INVALID_PASSWORD',
-                logLevel: LogLevel::INFO
+                logLevel: LogLevel::WARNING
             );
         }
 
@@ -206,7 +206,7 @@ class AutharizationService
                 message: 'Сессия не найдена',
                 code: ResponseAlias::HTTP_UNAUTHORIZED,
                 responseCode: 'SESSION_NOT_FOUND',
-                logLevel: LogLevel::INFO
+                logLevel: LogLevel::WARNING
             );
         }
 

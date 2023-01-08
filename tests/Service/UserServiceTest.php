@@ -85,7 +85,7 @@ class UserServiceTest extends AbstractTestCaseService
         $timeAttemptsLoginSec = $_ENV['TIME_ATTEMPTS_LOGIN_SEC'];
         $timeRefreshTokenSec = $_ENV['TIME_REFRESH_TOKEN_SEC'];
 
-        $connectRedis = ['host' => $_ENV['REDIS_HOST'], 'port' => $_ENV['PREDIS_PORT']];
+        $connectRedis = ['host' => $_ENV['REDIS_HOST'], 'port' => $_ENV['REDIS_PORT']];
         $this->redisClient = new Client($connectRedis);
 
         $userRepository = self::getContainer()->get(UserRepository::class);

@@ -9,6 +9,15 @@ use OpenApi\Annotations as OA;
 abstract class AbstractDtoControllerRequest extends AbstractDto
 {
     /**
+     * Сессия пользователя
+     *
+     * @var string
+     * @Annotation\Type("string")
+     * @Annotation\SerializedName("session")
+     */
+    public string $session;
+
+    /**
      * Информация для объекта берется из заголовка authorization
      *
      * @var JwtInfoDto|null

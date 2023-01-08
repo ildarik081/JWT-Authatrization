@@ -5,7 +5,7 @@ parameters:
   secret_key_path: '%env(resolve:JWT_SECRET_KEY_PATH)%'
   redis_connect: 
     host: '%env(resolve:REDIS_HOST)%'
-    port: '%env(resolve:PREDIS_PORT)%'
+    port: '%env(resolve:REDIS_PORT)%'
     password: '%env(resolve:REDIS_PASSWORD)%'
   time_access_token: '%env(resolve:TIME_ACCESS_TOKEN)%'
   time_refresh_token_sec: '%env(resolve:TIME_REFRESH_TOKEN_SEC)%'

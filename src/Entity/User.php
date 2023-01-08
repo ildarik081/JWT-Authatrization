@@ -7,105 +7,125 @@ use App\Component\Interface\Controller\ControllerResponseInterface;
 use App\Component\Utils\Aliases;
 use App\Repository\UserRepository;
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: 'users')]
+#[ORM\Index(name: 'user_emailx_arxx', columns: ['email', 'arx'])]
 #[ORM\HasLifecycleCallbacks]
 class User implements ControllerResponseInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    /** @phpstan-ignore-next-line */
-    private int $id;
-
-    #[ORM\Column(
-        type: 'string',
-        length: 100,
-        nullable: false,
-        options: ['comment' => 'Email пользователя']
-    )
+    #[
+        ORM\Column(
+            type: Types::INTEGER,
+            nullable: false,
+            options: ['comment' => 'Идентификатор пользователя']
+        )
     ]
-    private string $email;
+    private ?int $id = null;
 
-    #[ORM\Column(
-        type: 'string',
-        length: 32,
-        nullable: false,
-        options: ['comment' => 'Хэш пароля']
-    )
+    #[
+        ORM\Column(
+            type: Types::STRING,
+            length: 100,
+            nullable: false,
+            options: ['comment' => 'Email пользователя']
+        )
     ]
-    private string $password;
+    private ?string $email = null;
 
-    #[ORM\Column(
-        type: 'string',
-        length: 50,
-        nullable: false,
-        options: ['comment' => 'Имя пользователя']
-    )
+    #[
+        ORM\Column(
+            type: Types::STRING,
+            length: 32,
+            nullable: false,
+            options: ['comment' => 'Хэш пароля']
+        )
     ]
-    private string $firstName;
+    private ?string $password = null;
 
-    #[ORM\Column(
-        type: 'string',
-        length: 50,
-        nullable: true,
-        options: ['comment' => 'Фамилия пользователя']
-    )
+    #[
+        ORM\Column(
+            type: Types::STRING,
+            length: 50,
+            nullable: false,
+            options: ['comment' => 'Имя пользователя']
+        )
+    ]
+    private ?string $firstName = null;
+
+    #[
+        ORM\Column(
+            type: Types::STRING,
+            length: 50,
+            nullable: true,
+            options: ['comment' => 'Фамилия пользователя']
+        )
     ]
     private ?string $lastName = null;
 
-    #[ORM\Column(
-        type: 'string',
-        length: 50,
-        nullable: true,
-        options: ['comment' => 'Отчество пользователя']
-    )
+    #[
+        ORM\Column(
+            type: Types::STRING,
+            length: 50,
+            nullable: true,
+            options: ['comment' => 'Отчество пользователя']
+        )
     ]
     private ?string $secondName = null;
 
-    #[ORM\Column(
-        type: 'date',
-        nullable: true,
-        options: ['comment' => 'Дата рождения пользователя']
-    )
+    #[
+        ORM\Column(
+            type: Types::DATE_MUTABLE,
+            nullable: true,
+            options: ['comment' => 'Дата рождения пользователя']
+        )
     ]
     private ?DateTime $dtBirth = null;
 
-    #[ORM\Column(
-        type: 'string',
-        length: 15,
-        nullable: false,
-        options: ['comment' => 'Ip при регистрации']
-    )
+    #[
+        ORM\Column(
+            type: Types::STRING,
+            length: 15,
+            nullable: false,
+            options: ['comment' => 'Ip при регистрации']
+        )
     ]
-    private string $ip;
+    private ?string $ip = null;
 
-    #[ORM\Column(
-        type: 'datetime',
-        nullable: true,
-        options: ['comment' => 'Дата регистрации']
-    )
+    #[
+        ORM\Column(
+            type: Types::DATETIME_MUTABLE,
+            nullable: false,
+            options: ['comment' => 'Дата регистрации']
+        )
     ]
     private ?DateTime $dtCreate = null;
 
-    #[ORM\Column(
-        type: 'datetime',
-        nullable: true,
-        options: ['comment' => 'Дата обновления информации']
-    )
+    #[
+        ORM\Column(
+            type: Types::DATETIME_MUTABLE,
+            nullable: false,
+            options: ['comment' => 'Дата обновления информации']
+        )
     ]
     private ?DateTime $dtUpdate = null;
 
-    #[ORM\Column(
-        type: 'boolean',
-        nullable: false,
-        options: ['comment' => 'true - пользователь в архиве']
-    )
+    #[
+        ORM\Column(
+            type: Types::BOOLEAN,
+            nullable: false,
+            options: [
+                'comment' => 'true - пользователь в архиве',
+                'default' => false
+            ]
+        )
     ]
     private bool $arx = false;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -115,7 +135,7 @@ class User implements ControllerResponseInterface
         return $this->email;
     }
 
-    public function setEmail(?string $email): self
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -127,7 +147,7 @@ class User implements ControllerResponseInterface
         return $this->password;
     }
 
-    public function setPassword(?string $password): self
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
@@ -139,7 +159,7 @@ class User implements ControllerResponseInterface
         return $this->firstName;
     }
 
-    public function setFirstName(?string $firstName): self
+    public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
 
@@ -187,14 +207,14 @@ class User implements ControllerResponseInterface
         return $this->ip;
     }
 
-    public function setIp(?string $ip): self
+    public function setIp(string $ip): self
     {
         $this->ip = $ip;
 
         return $this;
     }
 
-    public function getDtCreate(): string
+    public function getDtCreate(): ?string
     {
         return ($this->dtCreate)->format(Aliases::DT_FORMAT);
     }
