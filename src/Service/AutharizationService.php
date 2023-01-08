@@ -98,7 +98,6 @@ class AutharizationService
         $this->checkSession($request->refreshToken);
 
         $this->redisTools->clearRedisData(
-            /** @phpstan-ignore-next-line */
             $request->session,
             $request->refreshToken,
             $request->jwtInfo?->user->id
